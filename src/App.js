@@ -53,10 +53,10 @@ class App extends Component {
     this.updateNoteListener.unsubscribe();
   }
   
-
-  getNotes = async  () => {
-    
-  }
+  getNotes = async () => {
+    const result = await API.graphql(graphqlOperation(listNotes));
+    this.setState({ notes: result.data.listNotes.items });
+  };
 
   handleChangeNote = event => this.setState({ note: event.target.value })
   
@@ -109,7 +109,7 @@ class App extends Component {
     // this.setState({ notes: updatedNotes });
   }
 
-  handleSetNote = ({note, id}) => this.setState({ note, id });
+  handleSetNote = ({ note, id }) => this.setState({ note, id });
 
 
   render() {
